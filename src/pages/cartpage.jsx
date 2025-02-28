@@ -1,12 +1,22 @@
 import React from "react";
 
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { ProductProvuider } from "../context/productprovider";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const { state, dispatch, darkMode } = useContext(ProductProvuider);
     const navigate = useNavigate();
+    const [count ,  setCount] = useState(1);
+
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+
+    const handlecheckout = () => {
+        {isAuthenticated ? 
+            navigate("/checkout") : navigate("/login")
+        }
+    }
+
 
     return (
         <div className={`min-h-screen p-6 transition ${
@@ -24,11 +34,18 @@ const Cart = () => {
                     {state.cart.map((product) => (
                         <div
                             key={product.id}
-                            className="p-4 shadow-md rounded-lg text-center"
+                            className="p-4 shadow-md rounded-lg text-center justify-center"
                         >
                             <img src={product.image} alt={product.title} width = "100" className="h-64 w-full object-contain" />
                             <h3 className="text-lg font-semibold mt-2">{product.title}</h3>
                             <p className="text-blue-600 dark:text-blue-300 font-bold">${product.price}</p>
+                            <div className="flex justify-center space-x-3 ">
+                            <button className=" px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
+                            onClick={()=> setCount(count+1)}>+</button>
+                            <p className="font-bold text-xl text-red-700 py-2">{count}</p>
+                            <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
+                            onClick={()=>(count > 0 ? setCount(count - 1) :0   )}>-</button>
+                            </div>
 
                             <button
                                 onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: product })}
@@ -42,20 +59,22 @@ const Cart = () => {
                 </div>
             )}
 
-            {/* Back to Products Button */}
+        
             <div className=" content-center flex gap-4  ml-130 mt-8 ">
                 <button
                     onClick={() => navigate("/productDetails")}
-                    className=" justify-center px-6 py-2 bg-red-50 text-white rounded-md hover:bg-blue-700"
+                    className=" justify-center px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
                 >
                     Back to Products
                 </button>
-                <button
-                    onClick={() => navigate("/checkout")}
+                    <button
+                    onClick={handlecheckout}
                     className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-blue-700"
                 >
                     checkout
                 </button>
+                
+                
 
             </div>
         </div>

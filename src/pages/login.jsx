@@ -56,36 +56,48 @@ const Login = () => {
     };
 
     return (
-        <div className={`flex flex-col items-center justify-center min-h-screen transition ${
+        <div className={`flex flex-col items-center justify-center min-h-screen transition m-20 p-10 ${
             darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
         }`}>
             <h2 className="text-3xl font-bold mb-4">Login</h2>
-            <form onSubmit={handleLogin} className="block w-xs px-3 py-2 mb-4 text-gray-700 bg-blue-300 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            <form onSubmit={handleLogin} className="text-2xl  w-lg px-3 py-5 mb-10   text-gray-700 bg-cyan-200 border border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 {error && <p className="text-red-500">{error}</p>}
-                <label className="font-bold" > Username</label>
+                <label className="block  font-bold " >
+                  <span> Username</span>
+                  </label>
                 <input
                     type="email"
                     placeholder="Enter mobile number or Email id"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full border border border-gray-300 rounded-md"
+                    className=" gap-x-10 w-full border border-solid border-black-300 rounded-md mb-4"
                     required
                 />
                                 
-                <label className="font-bold" > Password</label>
+                <label className="block  font-bold" >
+                  <span>Password</span> </label>
                 <input
                     type="password"
                     placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full border border border-gray-300 rounded-md "
+                    className="w-full  border border-solid  border-black-300 rounded-md mb-4"
                     required
                 />
-                <button type="submit" className="bg-gray-500 text-white px-4 py-2 rounded w-full">
+                <button type="submit" className="font-bold text-blue-800  px-4 py-2 rounded-full block mx-auto  bg-cyan-400">
                     Login
                 </button>
-              
-            </form>
+                </form>
+                <div className="block mb-200 px-3 py-20 " >
+
+                <p className="text-xl justify-center  text-blue-500 ">
+                  New to Store Create an Account 
+                  </p>
+                <button className="text-xl text-red-500  rounded w-full" 
+                onClick={()=> navigate("/signup")}> Sign Up
+                  </button>
+                  </div>
+            
         </div>
     );
 };

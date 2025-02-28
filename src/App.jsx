@@ -8,6 +8,7 @@ import './App.css'
 import Cart from "./pages/cartpage";
 import Login from "./pages/login";
 import CheckOut from "./pages/checkOut";
+import Signup from "./pages/signup";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Header />
         <Routes>
         <Route path="/productDetails" element={<ProductList />} />
+        <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/" element={<ProductList />} />

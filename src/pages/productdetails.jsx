@@ -8,7 +8,6 @@ const ProductDetail = () => {
     const { id } = useParams(); 
     const navigate = useNavigate();
 
-    // Find the selected product
     const product = state.products.find((p) => p.id === parseInt(id));
 
     if (!product) {

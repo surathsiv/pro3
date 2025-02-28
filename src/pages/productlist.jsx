@@ -3,9 +3,10 @@ import { useContext } from "react";
 import { ProductProvuider } from "../context/productprovider";
 import { useNavigate } from "react-router-dom";
 
+
 const ProductList = () => {
     const { state, darkMode } = useContext(ProductProvuider);
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate(); 
 
     if (state.loading) return <p>Loading products...</p>;
     if (state.error) return <p>Error: {state.error}</p>;
@@ -25,7 +26,7 @@ const ProductList = () => {
                     <img
                         src={product.image}
                         alt={product.title}
-                        width = "100"
+                        width = "200"
                         className="h-64 w-full object-contain"
                     />
                     <h3 className="text-lg font-semibold mt-2">{product.title}</h3>

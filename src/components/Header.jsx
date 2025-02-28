@@ -12,8 +12,8 @@ const Header = () => {
     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
 
     const handleLogout = () => {
-        localStorage.removeItem("isAuthenticated"); // ✅ Remove login state
-        navigate("/login"); // ✅ Redirect to login
+        localStorage.removeItem("isAuthenticated"); 
+        navigate("/login"); 
     };
 
     return (
@@ -23,28 +23,14 @@ const Header = () => {
             <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-300">Product Store 🛒</h1>
 
             <div className="flex items-center gap-4">
-                {/* Dark Mode Toggle */}
+                
                 <button
                     onClick={toggleDarkMode}
                     className="p-2 rounded-md transition bg-gray-200 dark:bg-gray-700 dark:text-white"
                 >
                     {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
                 </button>
-                {isAuthenticated ? (
-                    <button
-                        onClick={handleLogout}
-                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
-                    >
-                        Logout
-                    </button>
-                ) : (
-                    <button
-                        onClick={() => navigate("/login")}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
-                    >
-                        Login
-                    </button>
-                )}
+       
 
                 {/* Cart Icon (Navigate to /cart) */}
                 <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>

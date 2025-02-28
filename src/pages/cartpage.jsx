@@ -46,7 +46,7 @@ const Cart = () => {
             <div className=" content-center flex gap-4  ml-130 mt-8 ">
                 <button
                     onClick={() => navigate("/productDetails")}
-                    className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700"
+                    className=" justify-center px-6 py-2 bg-red-50 text-white rounded-md hover:bg-blue-700"
                 >
                     Back to Products
                 </button>

@@ -19,7 +19,7 @@ const ProductList = () => {
                 <div
                     key={product.id}
                     className={`p-4 shadow-md rounded-lg text-center transition ${
-                        darkMode ? "bg-orange-200 h-5" : "bg-white text-black"
+                        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
                     }`}
                 >
                     <img

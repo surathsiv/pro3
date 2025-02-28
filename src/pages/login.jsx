@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductProvuider } from "../context/productprovider";
@@ -26,6 +27,7 @@ const Login = () => {
         });
   
         const data = await response.json();
+        console.log(data);
   
 
         if (!response.ok) {
@@ -58,20 +60,22 @@ const Login = () => {
             darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
         }`}>
             <h2 className="text-3xl font-bold mb-4">Login</h2>
-            <form onSubmit={handleLogin} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+            <form onSubmit={handleLogin} className="block w-xs px-3 py-2 mb-4 text-gray-700 bg-blue-300 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 {error && <p className="text-red-500">{error}</p>}
-                <div className="flex-col gap-x-3">
+                <label className="font-bold" > Username</label>
                 <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Enter mobile number or Email id"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full border border border-gray-300 rounded-md"
                     required
                 />
+                                
+                <label className="font-bold" > Password</label>
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full border border border-gray-300 rounded-md "
@@ -80,7 +84,7 @@ const Login = () => {
                 <button type="submit" className="bg-gray-500 text-white px-4 py-2 rounded w-full">
                     Login
                 </button>
-                </div>
+              
             </form>
         </div>
     );

@@ -2,20 +2,26 @@ import React from "react";
 
 import { useState, useContext } from "react";
 import { ProductProvuider } from "../context/productprovider";
-import { useNavigate } from "react-router-dom";
+import { IDLE_FETCHER, useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const { state, dispatch, darkMode } = useContext(ProductProvuider);
-    const navigate = useNavigate();
-    const [count ,  setCount] = useState(1);
+        const navigate = useNavigate();
+
 
     const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    
+        
+    
 
     const handlecheckout = () => {
         {isAuthenticated ? 
             navigate("/checkout") : navigate("/login")
         }
+    
+        
     }
+    
 
 
     return (
@@ -34,23 +40,27 @@ const Cart = () => {
                     {state.cart.map((product) => (
                         <div
                             key={product.id}
-                            className="p-4 shadow-md rounded-lg text-center justify-center"
+                            className="p-4 shadow-md rounded-lg text-center justify-center
+                            "
                         >
                             <img src={product.image} alt={product.title} width = "100" className="h-64 w-full object-contain" />
                             <h3 className="text-lg font-semibold mt-2">{product.title}</h3>
                             <p className="text-blue-600 dark:text-blue-300 font-bold">${product.price}</p>
+
                             <div className="flex justify-center space-x-3 ">
-                            <button className=" px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
-                            onClick={()=> setCount(count+1)}>+</button>
-                            <p className="font-bold text-xl text-red-700 py-2">{count}</p>
+                            <button     
+                             onClick={() => dispatch({ type: "Inc", payload: product })}
+                            className=" px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
+                            >+</button>
+                            <p className="font-bold text-xl text-red-700 py-2">{product.quantity}</p>
                             <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
-                            onClick={()=>(count > 0 ? setCount(count - 1) :0   )}>-</button>
+                            onClick={() => dispatch({ type: "Dec", payload: product })}>-</button>
                             </div>
 
                             <button
                                 onClick={() => dispatch({ type: "REMOVE_FROM_CART", payload: product })}
                                 className="mt-3 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700"
-                            >
+                            >   
                                 Remove from Cart ❌
                             </button>
 
@@ -67,7 +77,7 @@ const Cart = () => {
                 >
                     Back to Products
                 </button>
-                    <button
+                    <button 
                     onClick={handlecheckout}
                     className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-blue-700"
                 >

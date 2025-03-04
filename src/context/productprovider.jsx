@@ -17,13 +17,29 @@ const productsReducer = (state, action) => {
         case "FETCH_ERROR":
             return { ...state, products: [], loading: false, error: action.payload };
             case "ADD_TO_CART":
-            return { ...state, cart: [...state.cart, action.payload] };
+            return { ...state, cart: [...state.cart, {...action.payload, quantity:1}] };
+            case "Inc":     
+            return {
+                ...state,
+                cart: state.cart.map((item) =>
+                    item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
+                ),
+            }; 
+            case "Dec":     
+            return {
+                ...state,
+                cart: state.cart.map((item) =>
+                    item.id === action.payload.id  && item.quantity > 0 ? { ...item, quantity: item.quantity - 1 } : item
+                ),
+            }; 
+
             case "REMOVE_FROM_CART":
             return {...state,cart: state.cart.filter((item) => item.id !== action.payload.id),};
-            case "LOGIN":
+
+        case "LOGIN":
                 localStorage.setItem("isAuthenticated", "true"); 
-                return { ...state, isAuthenticated: true };
-            case "LOGOUT":
+             return { ...state, isAuthenticated: true };
+        case "LOGOUT":
                 localStorage.removeItem("isAuthenticated"); 
                 return { ...state, isAuthenticated: false };
             default:
